@@ -28,7 +28,16 @@ const FormUser = () => {
       return;
     } else {
       const { data } = await createUsers(form);
-      if (data.id) addUser(form);
+      if (data.id) {
+        addUser(form);
+        alert("Registro exitoso");
+        setForm({
+          name: "",
+          email: "",
+          address: "",
+          phone: "",
+        });
+      }
     }
   };
 
@@ -47,6 +56,7 @@ const FormUser = () => {
             type="text"
             id="name"
             name="name"
+            value={form.name}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Ingresa tu nombre"
             onChange={handleOnChange}
@@ -64,6 +74,7 @@ const FormUser = () => {
             type="email"
             id="email"
             name="email"
+            value={form.email}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Ingresa tu correo electrónico"
             onChange={handleOnChange}
@@ -81,6 +92,7 @@ const FormUser = () => {
             type="tel"
             id="phone"
             name="phone"
+            value={form.phone}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Ingresa tu número de teléfono"
             onChange={handleOnChange}
@@ -100,6 +112,7 @@ const FormUser = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Ingresa tu dirección"
             onChange={handleOnChange}
+            value={form.address}
             required
           ></textarea>
         </div>

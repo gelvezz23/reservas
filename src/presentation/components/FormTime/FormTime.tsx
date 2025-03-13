@@ -29,8 +29,10 @@ function FormTime() {
       return;
     } else {
       const data = await addNewDataUser(email, form);
-      console.log(data);
-      if (data) addNewDataZustand(email, form);
+      if (data) {
+        addNewDataZustand(email, form);
+        alert("Tu agenda quedo programada.");
+      }
     }
   };
   return (
