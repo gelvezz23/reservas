@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCreateUsers } from "../../../infrastructure/zustand/createUsers";
 import TimeRangeInput from "../TimeRangeInput";
 import { AddNewDataUsersType } from "../../../entities/firebase/addNewDataUser";
 import addNewDataUser from "../../../infrastructure/repository/addNewDataUser";
 
 function FormTime() {
+  const dateInputRef: any = useRef(null);
   const { users, addNewDataZustand } = useCreateUsers();
   const [email, setEmail] = useState<string>("");
   const [form, setForm] = useState<AddNewDataUsersType>({
@@ -13,7 +14,23 @@ function FormTime() {
     startHour: "",
     endHour: "",
   });
-  console.log(form);
+
+  useEffect(() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    let month: any = today.getMonth() + 1; // Los meses comienzan en 0
+    let day: any = today.getDate();
+
+    month = month < 10 ? "0" + month : month;
+    day = day < 10 ? "0" + day : day;
+
+    const minDate = `${year}-${month}-${day}`;
+
+    if (dateInputRef.current) {
+      dateInputRef.current.setAttribute("min", minDate);
+    }
+  }, []);
+
   const handleOnChange = (event: { target: { name: any; value: any } }) => {
     setForm({
       ...form,
@@ -80,6 +97,7 @@ function FormTime() {
             id="date"
             name="date"
             onChange={handleOnChange}
+            ref={dateInputRef}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
