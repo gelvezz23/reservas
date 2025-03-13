@@ -31,12 +31,6 @@ const FormUser = () => {
       if (data.id) {
         addUser(form);
         alert("Registro exitoso");
-        setForm({
-          name: "",
-          email: "",
-          address: "",
-          phone: "",
-        });
       }
     }
   };
