@@ -34,7 +34,7 @@ function UserList() {
         <ul className="divide-y divide-gray-200">
           {users?.map((user, index) => {
             return (
-              <li className="py-4" key={index}>
+              <li className="py-4" key={`${index}-${user?.email}-l`}>
                 <User
                   endHour={user?.endHour}
                   startHour={user?.startHour}
